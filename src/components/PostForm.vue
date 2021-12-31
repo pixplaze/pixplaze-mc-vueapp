@@ -7,8 +7,7 @@
             class="input"
             type="text"
             placeholder="Название"
-            v-bind:value="post.title"
-            v-on:input="post.title = $event.target.value"
+            v-model="post.title"
         >
         <label hidden for="post-body">Описание поста</label>
         <input
@@ -16,8 +15,7 @@
             class="input"
             type="text"
             placeholder="Описание"
-            :value="post.body"
-            @input="post.body = $event.target.value"
+            v-model="post.body"
         >
         <button
             class="btn"
