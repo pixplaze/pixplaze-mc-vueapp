@@ -41,12 +41,12 @@ export default {
             } else if (this.post.body == '') {
                 console.log('Тело поста не может быть пустым!');
             } else {
-                this.post.id = Date.now(),
-                this.$emit('create', this.post),
+                this.post.id = Date.now();
+                this.$emit('create', this.post);
                 this.post = {
                     title: '',
                     body: ''
-                }
+                };
             }
         },
     }

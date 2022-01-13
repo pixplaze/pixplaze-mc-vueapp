@@ -1,41 +1,66 @@
 <template>
     <div class="app">
-        <post-form @create="createPost"/>
-        <post-list :posts="posts"/>
+        <div class="posts-block">
+            <post-form @create="createPost"/>
+            <post-list :posts="posts"/>
+        </div>
+        <div class="test-block">
+            <test-form/>
+            <test-list v-on:upd="upd()" v-bind:tests="tests"/>
+        </div>
     </div>
 </template>
 
 <script>
     import PostForm from "./components/PostForm"
     import PostList from "@/components/PostList"
+    import TestForm from "@/components/TestForm"
+    import TestList from "@/components/TestList"
 
     export default {
         components: {
-            PostForm, PostList
+            PostForm, PostList,
+            TestForm, TestList,
         },
         data() {
             return {
                 posts: [
                     {id: 1, title: 'Title 1', body: 'Body 1'}
                 ],
+                tests: [
+                    {number: 'fdg', value: 'dfg'}
+                ],
             }
         },
         methods: {
             createPost(post) {
                 this.posts.push(post);
+            },
+            upd(test) {
+                console.log('updated!');
+                this.tests.push(test);
             }
         }
     }
     </script>
 
-    <style>
+<style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        .posts-block {
+            width: 100%;
+        }
+
+        .test-block {
+            width: 100%;
+        }
+
         .app {
             padding: 20px;
+            display: flex;
         }
 </style>
