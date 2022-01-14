@@ -5,8 +5,8 @@
             <post-list :posts="posts"/>
         </div>
         <div class="test-block">
-            <test-form/>
-            <test-list v-on:upd="upd()" v-bind:tests="tests"/>
+            <test-form @update="update" @add_row="addRow"/>
+            <test-list v-bind:tests="tests"/>
         </div>
     </div>
 </template>
@@ -24,6 +24,7 @@
         },
         data() {
             return {
+                page: {rows: 0},
                 posts: [
                     {id: 1, title: 'Title 1', body: 'Body 1'}
                 ],
@@ -36,9 +37,16 @@
             createPost(post) {
                 this.posts.push(post);
             },
-            upd(test) {
+            update(test) {
                 console.log('updated!');
-                this.tests.push(test);
+                this.tests[this.page.rows].number = test.number;
+                this.tests[this.page.rows].value = test.value;
+            },
+            addRow(e) {
+                this.page.rows += 1;
+                console.log('rows: ' + this.page.rows);
+
+                this.tests.push({number: '', value: ''});
             }
         }
     }

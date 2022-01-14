@@ -1,7 +1,8 @@
 <template>
     <form action="" @submit.prevent>
-        <input id="test-number-input" v-on:input="onNumberInput" v-bind:test="this.test.number" type="text">
-        <input id="test-value-input" v-on:input="onValueInput" v-bind:test="this.test.value" type="text">
+        <input id="test-number-input" v-model="test.number" v-on:input="onNumberInput" type="text">
+        <input id="test-value-input" v-model="test.value" v-on:input="onValueInput" type="text">
+        <button v-on:click="addRow">Add Row</button>
     </form>
 </template>
 
@@ -18,11 +19,16 @@
         methods: {
             onNumberInput(e) {
                 this.test.number = e.target.value;
-                this.$emit('upd', this.test);
+                this.$emit('update', this.test);
             },
             onValueInput(e) {
                 this.test.value = e.target.value;
-                this.$emit('upd', this.test);
+                this.$emit('update', this.test);
+            },
+            addRow(e) {
+                this.$emit('add_row');
+                this.test.number = '';
+                this.test.value = '';
             }
         }
     }
