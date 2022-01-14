@@ -1,7 +1,7 @@
 <template>
     <h3>Список пользователей</h3>
     <div class="post-list">
-        <post-item v-for="post in posts" :post="post"/>        
+        <post-item v-for="post in posts" :post="post" @delete_post="deletePost"/>
     </div>
 </template>
 
@@ -26,5 +26,8 @@
         margin-top: 15px;
         padding: 15px;
         border: 2px solid teal;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 </style>

@@ -17,40 +17,37 @@
             placeholder="Описание"
             v-model="post.body"
         >
-        <button
-            class="btn"
-            @click="createPost"
-        >Создать</button>
+        <my-button @click="createPost">Создать</my-button>
     </form>
 </template>
 
 <script>
-export default {
-    data() {
-        return {
-            post: {
-                title: '',
-                body: '',
-            }
-        }
-    },
-    methods: {
-        createPost() {
-            if (this.post.title == '') {
-                console.log('Заголовок поста не может быть пустым!');
-            } else if (this.post.body == '') {
-                console.log('Тело поста не может быть пустым!');
-            } else {
-                this.post.id = Date.now();
-                this.$emit('create', this.post);
-                this.post = {
+    export default {
+         data() {
+            return {
+                post: {
                     title: '',
-                    body: ''
-                };
+                    body: '',
+                }
             }
         },
+        methods: {
+            createPost() {
+                if (this.post.title == '') {
+                    console.log('Заголовок поста не может быть пустым!');
+                } else if (this.post.body == '') {
+                    console.log('Тело поста не может быть пустым!');
+                } else {
+                    this.post.id = Date.now();
+                    this.$emit('create', this.post);
+                    this.post = {
+                        title: '',
+                        body: ''
+                    };
+                }
+            },
+        }
     }
-}
 </script>
 
 <style scoped>
@@ -72,10 +69,6 @@ export default {
 
     .btn {
         margin-top: 15px;
-        padding: 10px;
         align-self: flex-end;
-        background: none;
-        border: 1px solid teal;
-        color: teal;
     }
 </style>
