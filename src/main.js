@@ -2,8 +2,8 @@ import { createApp } from 'vue'
 import App from './App'
 import components from '@/components/UI'
 
+// Создаём приложение Vue.js
 const app = createApp(App);
-app.mount('#app');
 
 
 // Перебираем все глобальные компоненты из `UI` и добавляем
@@ -11,3 +11,8 @@ app.mount('#app');
 components.forEach(component => {
     app.component(component.name, component)
 });
+
+// После (и только после!), монтируем в приложение
+app.mount('#app');
+
+console.log(components);

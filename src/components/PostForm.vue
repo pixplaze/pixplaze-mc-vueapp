@@ -2,21 +2,19 @@
     <form action="" @submit.prevent>
         <h4>Создание поста</h4>
         <label hidden for="post-title">Название поста</label>
-        <input
+        <my-input
             id="post-title"
-            class="input"
             type="text"
             placeholder="Название"
             v-model="post.title"
-        >
+        />
         <label hidden for="post-body">Описание поста</label>
-        <input
+        <my-input
             id="post-body"
-            class="input"
             type="text"
             placeholder="Описание"
             v-model="post.body"
-        >
+        />
         <my-button @click="createPost">Создать</my-button>
     </form>
 </template>
@@ -58,13 +56,6 @@
 
     .app {
         padding: 20px;
-    }
-
-    .input {
-        width: 100%;
-        margin-top: 15px;
-        border: 1px solid teal;
-        padding: 10px;
     }
 
     .btn {
