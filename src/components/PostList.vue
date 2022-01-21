@@ -1,5 +1,5 @@
 <template>
-    <div class="post-list">
+    <div class="post-list" v-if="posts.length > 0">
         <h3>Список пользователей</h3>
         <post-item
             v-for="post in posts"
@@ -8,6 +8,12 @@
             @remove="$emit('remove', post)"
         />
     </div>
+    <h2 v-else style="color: red">Список пользователей пуст пуст!</h2>
+    <!--
+    В данном случае, если условие не выполняется, элемент будет полностью удалён из DOM-дерева.
+    Такое же условное представление моожет быть реализовано в виде v-show="<условие отображения>".
+    Например, `v-show="posts.length === 0".
+     -->
 </template>
 
 <script>
