@@ -1,7 +1,12 @@
 <template>
-    <h3>Список пользователей</h3>
     <div class="post-list">
-        <post-item v-for="post in posts" :post="post" @delete_post="deletePost"/>
+        <h3>Список пользователей</h3>
+        <post-item
+            v-for="post in posts"
+            :post="post"
+            :key="post.id"
+            @remove="$emit('remove', post)"
+        />
     </div>
 </template>
 
@@ -20,14 +25,4 @@
     }
 </script>
 
-<style scoped>
-    .post-item {
-        color: teal;
-        margin-top: 15px;
-        padding: 15px;
-        border: 2px solid teal;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-</style>
+<style scoped></style>

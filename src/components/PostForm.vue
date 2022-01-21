@@ -25,24 +25,25 @@
             return {
                 post: {
                     title: '',
-                    body: '',
+                    body: ''
                 }
             }
         },
         methods: {
             createPost() {
-                if (this.post.title == '') {
-                    console.log('Заголовок поста не может быть пустым!');
-                } else if (this.post.body == '') {
-                    console.log('Тело поста не может быть пустым!');
-                } else {
-                    this.post.id = Date.now();
-                    this.$emit('create', this.post);
-                    this.post = {
-                        title: '',
-                        body: ''
-                    };
+                if (this.post.title == '' || this.post.body == '') {
+                    if (this.post.title == '') {
+                        console.log('Заголовок поста не может быть пустым!');}
+                    if (this.post.body == '') {
+                        console.log('Тело поста не может быть пустым!');}
+                    return;
                 }
+                this.post.id = Date.now();
+                this.$emit('create', this.post);
+                this.post = {
+                    title: '',
+                    body: ''
+                };
             },
         }
     }

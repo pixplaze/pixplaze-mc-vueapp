@@ -14,5 +14,5 @@ components.forEach(component => {
 
 // После (и только после!), монтируем в приложение
 app.mount('#app');
-
+console.log('Список глобальных компонентов:')
 console.log(components);

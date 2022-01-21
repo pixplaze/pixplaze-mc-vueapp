@@ -2,7 +2,7 @@
     <div class="app">
         <div class="posts-block">
             <post-form @create="createPost"/>
-            <post-list :posts="posts"/>
+            <post-list :posts="posts" @remove="removePost"/>
         </div>
     </div>
 </template>
@@ -18,7 +18,7 @@
         data() {
             return {
                 posts: [
-                    {id: 1, title: 'Title 1', body: 'Body 1'}
+                    {id: '1', title: 'Title 1', body: 'Body 1'}
                 ],
             }
         },
@@ -26,6 +26,10 @@
             createPost(post) {
                 this.posts.push(post);
             },
+            removePost(post) {
+                this.posts = this.posts.filter(p => p.id != post.id);
+                console.log('remove event handled!');
+            }
         }
     }
     </script>
