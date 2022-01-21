@@ -6,15 +6,14 @@
             id="post-title"
             type="text"
             placeholder="Название"
-            v-model:value="post.title"
-            v-model:myvalue="post.title"
+            v-model="post.title"
         />
         <label hidden for="post-body">Описание поста</label>
         <my-input
             id="post-body"
             type="text"
             placeholder="Описание"
-            v-model:value="post.body"
+            v-model="post.body"
         />
         <my-button @click="createPost">Создать</my-button>
     </form>
