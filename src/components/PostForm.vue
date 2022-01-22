@@ -15,6 +15,8 @@
             placeholder="Описание"
             v-model="post.body"
         />
+        <label for="autoclosable-checkbox">Закрыть после добавления</label>
+        <input id="autoclosable-checkbox" type="checkbox" @input="updateAutoclosable">
         <my-button @click="createPost">Создать</my-button>
     </form>
 </template>
@@ -26,7 +28,7 @@
                 post: {
                     title: '',
                     body: ''
-                }
+                },
             }
         },
         methods: {
@@ -45,6 +47,9 @@
                     body: ''
                 };
             },
+            updateAutoclosable(e) {
+                this.$emit('update:autoclosable', e.target.checked);
+            }
         }
     }
 </script>
