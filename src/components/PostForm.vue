@@ -4,6 +4,7 @@
         <label hidden for="post-title">Название поста</label>
         <my-input
             id="post-title"
+            class="content-row"
             type="text"
             placeholder="Название"
             v-model="post.title"
@@ -12,12 +13,17 @@
         <my-input
             id="post-body"
             type="text"
+            class="content-row"
             placeholder="Описание"
             v-model="post.body"
         />
-        <label for="autoclosable-checkbox">Закрыть после добавления</label>
-        <input id="autoclosable-checkbox" type="checkbox" @input="updateAutoclosable">
-        <my-button @click="createPost">Создать</my-button>
+        <div class="form-buttons">
+            <div class="content-row autoclosable-checkbox-wrapper">
+                <label for="autoclosable-checkbox">Закрыть после добавления</label>
+                <input id="autoclosable-checkbox" type="checkbox" @input="updateAutoclosable">
+            </div>
+            <my-button class="content-row" @click="createPost">Создать</my-button>
+        </div>
     </form>
 </template>
 
@@ -64,8 +70,13 @@
         padding: 20px;
     }
 
-    .btn {
-        margin-top: 15px;
-        align-self: flex-end;
+    .autoclosable-checkbox-wrapper {
+        display: flex;
+        justify-content: space-between;
+        vertical-align: middle;
+    }
+
+    #autoclosable-checkbox {
+        margin-top: auto;
     }
 </style>

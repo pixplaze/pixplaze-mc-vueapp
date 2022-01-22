@@ -24,7 +24,6 @@
 <style scoped>
     .input {
         width: 100%;
-        margin-top: 15px;
         border: 1px solid teal;
         padding: 10px;
     }
