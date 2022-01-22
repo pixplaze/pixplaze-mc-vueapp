@@ -1,6 +1,6 @@
 <template>
     <select title="sort-type" name="sort-type" v-model="modelValue" @change="changeOption">
-        <option value="none" disabled>Выберите из списка</option>
+        <option value="" disabled>Выберите из списка</option>
         <option
             name="sort-type"
             v-for="option in options"

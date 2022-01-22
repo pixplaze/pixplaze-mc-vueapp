@@ -13,7 +13,7 @@
                 :show="true"
             ><post-form @update:autoclosable="updateAutoclosable" @create="createPost"/>
             </my-dialog>
-            <post-list v-if="!isPostsLoading" :posts="posts" @remove="removePost"/>
+            <post-list v-if="!isPostsLoading" :posts="sortedPosts" @remove="removePost"/>
             <div class="content-row" v-else>Идёт загрузка...</div>
         </div>
     </div>
@@ -63,8 +63,9 @@
         // Названия таких свойств должны совпадать с названием полей,
         // за которыми они следят.
         watch: {
+            /*
             selectedSort(newValue) {
-                console.log('Selected sort: ' + newValue);
+                console.log('Sorting by watch property...');
                 this.posts.sort((post1, post2) => {
                     return post1[newValue]?.localeCompare(post2[this.selectedSort]);
                     // В данном случае newValue и this.selectedSort - одно и то же
@@ -80,16 +81,25 @@
                 },
                 deep: true
             }
+            */
         },
-        /*
         // Секция вычисляемых свойств
         // Такие свойства (функции) запускаются только один раз для вычисления
         // возвращаемого значения и кэшируют результат. Вызываются повторно
         // только в случае, если св-во от которого зависит результат функции
         // (исходные данные) изменяются.
-        computed: {}
-        */
-
+        // Такие свойства могут иметь любые названия.
+        // Такие поля могут использоваться как неизменяемые свойства
+        // (вызываются как свойства а не функции)
+        computed: {
+            sortedPosts() {
+                // Возвращается уже обработанная копия исходных данных.
+                console.log('Sorting by computed property...');
+                return [...this.posts].sort((post1, post2) => {
+                    return post1[this.selectedSort]?.localeCompare(post2[this.selectedSort]);
+                });
+            }
+        },
         // Секция глобальных функций
         data() {
             return {
