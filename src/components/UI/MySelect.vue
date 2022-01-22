@@ -1,5 +1,5 @@
 <template>
-    <select name="sort-type" id="" v-model="modelValue" @change="changeOption">
+    <select title="sort-type" name="sort-type" v-model="modelValue" @change="changeOption">
         <option value="none" disabled>Выберите из списка</option>
         <option
             name="sort-type"
@@ -24,8 +24,6 @@
         },
         methods: {
             changeOption(e) {
-                console.log(e);
-                console.log(e.target.value);
                 this.$emit('update:modelValue', e.target.value);
             }
         }

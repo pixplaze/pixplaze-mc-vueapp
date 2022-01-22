@@ -29,14 +29,6 @@
 
 <script>
     export default {
-         data() {
-            return {
-                post: {
-                    title: '',
-                    body: ''
-                },
-            }
-        },
         methods: {
             createPost() {
                 if (this.post.title == '' || this.post.body == '') {
@@ -56,7 +48,16 @@
             updateAutoclosable(e) {
                 this.$emit('update:autoclosable', e.target.checked);
             }
-        }
+        },
+        watch: {},
+        data() {
+           return {
+               post: {
+                   title: '',
+                   body: ''
+               },
+           }
+       },
     }
 </script>
 
