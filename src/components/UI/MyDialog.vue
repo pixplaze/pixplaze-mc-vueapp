@@ -26,6 +26,7 @@
 </script>
 <style scoped>
     .dialog {
+        z-index: 1;
         position: fixed;
         display: flex;
         top: 0;

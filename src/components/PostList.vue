@@ -1,5 +1,5 @@
 <template>
-    <div class="content-row post-list" v-if="posts.length > 0">
+    <div class="content-row posts-list-wrapper" v-if="posts.length > 0">
         <h3>Список постов</h3>
         <transition-group name="posts-list">
             <post-item
@@ -35,7 +35,13 @@
 </script>
 
 <style scoped>
+    .posts-list-wrapper {
+        overflow: hidden;
+    }
+
     .posts-list-item {
+        z-index: 0;
+        position: relative;
         display: inline-block;
         margin-right: 10px;
     }
@@ -48,6 +54,6 @@
     .posts-list-enter-from,
     .posts-list-leave-to {
         opacity: 0;
-        transform: translateX(30px);
+        transform: translateX(50px);
     }
 </style>
