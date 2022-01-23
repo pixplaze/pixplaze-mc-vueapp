@@ -11,7 +11,7 @@
             <my-dialog
                 v-model:show="dialogVisible"
                 :show="true"
-            ><post-form @update:autoclosable="updateAutoclosable" @create="createPost"/>
+            ><post-form v-model:autoclosable="autoclosable" @create="createPost"/>
             </my-dialog>
             <post-list v-if="!isPostsLoading" :posts="sortedPosts" @remove="removePost"/>
             <div class="content-row" v-else>Идёт загрузка...</div>
@@ -39,10 +39,6 @@
             removePost(post) {
                 this.posts = this.posts.filter(p => p.id != post.id);
                 console.log('remove event handled!');
-            },
-            updateAutoclosable(checked) {
-                console.log('autolosable event catched!');
-                this.autoclosable = checked;
             },
             async fetchPosts() {
                 try {
@@ -107,7 +103,7 @@
                     {id: '1', title: 'Title 1', body: 'Body 1'}
                 ],
                 dialogVisible: false,
-                autoclosable: false,
+                autoclosable: true,
                 isPostsLoading: true,
                 selectedSort: '',
                 sortOptions: [

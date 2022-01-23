@@ -20,7 +20,7 @@
         <div class="form-buttons">
             <div class="content-row autoclosable-checkbox-wrapper">
                 <label for="autoclosable-checkbox">Закрыть после добавления</label>
-                <input id="autoclosable-checkbox" type="checkbox" @input="updateAutoclosable">
+                <input id="autoclosable-checkbox" type="checkbox" :checked="autoclosable" @input="updateAutoclosable">
             </div>
             <my-button class="content-row" @click="createPost">Создать</my-button>
         </div>
@@ -29,6 +29,12 @@
 
 <script>
     export default {
+        props: {
+            autoclosable: {
+                type: Boolean,
+                required: true
+            }
+        },
         methods: {
             createPost() {
                 if (this.post.title == '' || this.post.body == '') {
