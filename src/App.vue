@@ -3,6 +3,16 @@
         <div class="posts-block">
             <h1>Страница с постами</h1>
             <div class='app-buttons content-row'>
+                <div
+                    class="button-select-page"
+                    v-for="page_number in totalPages"
+                    :key="page_number"
+                    :class="{
+                        'button-current-page': page_number === page
+                    }"
+                    @click="changePage(page_number)"
+                >{{page_number}}
+                </div>
                 <my-input
                     v-model="searchQuery"
                     placaholder="Найти"
@@ -44,10 +54,18 @@
                 this.posts = this.posts.filter(p => p.id != post.id);
                 console.log('remove event handled!');
             },
+            changePage(page_number) {
+                this.page = page_number;
+            },
             async fetchPosts() {
                 try {
                     this.isPostsLoading = true;
-                    const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10');
+                    const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
+                        params: {
+                            _page: this.page,
+                            _limit: this.limit
+                        }});
+                        this.totalPages = Math.ceil(response.headers['x-total-count'] / this.limit);
                     this.posts = response.data;
                     console.log(response.data);
                 } catch (e) {
@@ -82,6 +100,9 @@
                 deep: true
             }
             */
+            page() {
+                this.fetchPosts();
+            }
         },
         // Секция вычисляемых свойств
         // Такие свойства (функции) запускаются только один раз для вычисления
@@ -121,6 +142,7 @@
                 searchQuery: '',
                 page: 1,
                 limit: 10,
+                totalPages: 0,
                 sortOptions: [
                     {value: 'title', name: 'По названию'},
                     {value: 'body', name: 'По описанию'},
@@ -155,5 +177,33 @@
         .app-buttons {
             display: flex;
             justify-content: space-between;
+        }
+
+        .app-buttons .btn {
+            min-width: 150px;
+        }
+
+        .button-select-page {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            min-height: 40px;
+            border: 1px solid teal;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+            margin-right: 5px;
+
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+
+            cursor: pointer;
+        }
+
+        .button-current-page {
+            background-color: teal;
+            color: white;
         }
 </style>
