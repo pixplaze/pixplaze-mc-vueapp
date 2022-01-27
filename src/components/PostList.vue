@@ -30,7 +30,7 @@
                 type: Array,
                 required: true
             }
-        }
+        },
     }
 </script>
 
@@ -46,6 +46,16 @@
         margin-right: 10px;
     }
 
+    /*
+     * enter-active, leave-active, enter-from, leave-to, move -
+     * модификаторы стилей vue,
+     * Для того чтобы анимировать какой-либо элемент достаточно указать название
+     * необходимого класса и через дефис модификатор его стилей, чотбы задать
+     * особые стили по срабатыванию модификатора: .<classname>-<modificator>,
+     * где `<classname>` название необходимого класса, а `<modificator>` -
+     * название модификатора.
+     * Например: `.posts-list-enter-active {}`
+     */
     .posts-list-enter-active,
     .posts-list-leave-active {
         transition: all .3s ease;
@@ -56,4 +66,8 @@
         opacity: 0;
         transform: translateX(50px);
     }
+
+     .posts-list-move {
+         transition: all 1s ease-in-out;
+     }
 </style>

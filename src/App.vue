@@ -3,6 +3,10 @@
         <div class="posts-block">
             <h1>Страница с постами</h1>
             <div class='app-buttons content-row'>
+                <my-input
+                    v-model="searchQuery"
+                    placaholder="Найти"
+                />
                 <my-button
                     @click="dialogVisible=true"
                 >Создать пост</my-button>
@@ -13,7 +17,7 @@
                 :show="true"
             ><post-form v-model:autoclosable="autoclosable" @create="createPost"/>
             </my-dialog>
-            <post-list v-if="!isPostsLoading" :posts="sortedPosts" @remove="removePost"/>
+            <post-list v-if="!isPostsLoading" :posts="sortedAndSearchedPosts" @remove="removePost"/>
             <div class="content-row" v-else>Идёт загрузка...</div>
         </div>
     </div>
@@ -94,6 +98,14 @@
                 return [...this.posts].sort((post1, post2) => {
                     return post1[this.selectedSort]?.localeCompare(post2[this.selectedSort]);
                 });
+            },
+            sortedAndSearchedPosts() {
+
+                if (!this.selectedSort || this.selectedSort === 'title') {
+                    return this.sortedPosts.filter(post => post.title.toLowerCase().includes(this.searchQuery.toLowerCase()));
+                } else {
+                    return this.sortedPosts.filter(post => post.body.toLowerCase().includes(this.searchQuery.toLowerCase()));
+                }
             }
         },
         // Секция глобальных функций
@@ -106,6 +118,9 @@
                 autoclosable: true,
                 isPostsLoading: true,
                 selectedSort: '',
+                searchQuery: '',
+                page: 1,
+                limit: 10,
                 sortOptions: [
                     {value: 'title', name: 'По названию'},
                     {value: 'body', name: 'По описанию'},
