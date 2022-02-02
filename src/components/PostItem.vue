@@ -1,9 +1,9 @@
 <template>
     <div class="post-item">
         <div class="post-content">
-            <div>{{post.id}}</div>
-            <div><strong>Название: </strong>{{post.title}}</div>
-            <div><strong>Описание: </strong>{{post.body}}</div>
+            <div>{{index}}</div>
+            <div><strong>Имя профиля: </strong>{{post.name}}</div>
+            <div><strong>UUID: </strong>{{post.uuid}}</div>
         </div>
         <div class="post-buttons">
             <my-button
@@ -19,7 +19,8 @@
             post: {
                 type: Object,
                 required: true
-            }
+            },
+            index: [Number]
         }
     }
 </script>

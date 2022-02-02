@@ -1,21 +1,21 @@
 <template>
     <form @submit.prevent>
-        <h4>Создание поста</h4>
-        <label hidden for="post-title">Название поста</label>
+        <h4>Создание профиля</h4>
+        <label hidden for="post-name">Имя профиля</label>
         <my-input
-            id="post-title"
+            id="post-name"
             class="content-row"
             type="text"
             placeholder="Название"
-            v-model="post.title"
+            v-model="post.name"
         />
-        <label hidden for="post-body">Описание поста</label>
+        <label hidden for="post-uuid">UUID</label>
         <my-input
-            id="post-body"
+            id="post-uuid"
             type="text"
             class="content-row"
             placeholder="Описание"
-            v-model="post.body"
+            v-model="post.uuid"
         />
         <div class="form-buttons">
             <div class="content-row autoclosable-checkbox-wrapper">
@@ -37,18 +37,18 @@
         },
         methods: {
             createPost() {
-                if (this.post.title == '' || this.post.body == '') {
-                    if (this.post.title == '') {
+                if (this.post.name == '' || this.post.uuid == '') {
+                    if (this.post.name == '') {
                         console.log('Заголовок поста не может быть пустым!');}
-                    if (this.post.body == '') {
+                    if (this.post.uuid == '') {
                         console.log('Тело поста не может быть пустым!');}
                     return;
                 }
                 this.post.id = Date.now();
                 this.$emit('create', this.post);
                 this.post = {
-                    title: '',
-                    body: ''
+                    name: '',
+                    uuid: ''
                 };
             },
             updateAutoclosable(e) {
@@ -59,8 +59,8 @@
         data() {
            return {
                post: {
-                   title: '',
-                   body: ''
+                   name: '',
+                   uuid: ''
                },
            }
        },

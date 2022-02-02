@@ -1,15 +1,15 @@
 <template>
     <div class="content-row posts-list-wrapper" v-if="posts.length > 0">
-        <h3>Список постов</h3>
+        <h3>usercache.json</h3>
         <transition-group name="posts-list">
             <post-item
-                v-for="post in posts"
+                v-for="(post, index) in posts"
                 :post="post"
-                :key="post.id"
+                :key="post.uuid"
+                :index="index"
                 @remove="$emit('remove', post)"
             />
         </transition-group>
-
     </div>
     <h2 v-else class="content-row" style="color: red">Список постов пуст пуст!</h2>
     <!--

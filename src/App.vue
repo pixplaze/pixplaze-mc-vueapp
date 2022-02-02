@@ -1,9 +1,10 @@
 <template>
     <div class="app">
         <div class="posts-block">
-            <h1>Страница с постами</h1>
+            <h1>Список игроков</h1>
             <div class='app-buttons content-row'>
                 <div
+                    v-if="totalPages"
                     class="button-select-page"
                     v-for="page_number in totalPages"
                     :key="page_number"
@@ -19,7 +20,7 @@
                 />
                 <my-button
                     @click="dialogVisible=true"
-                >Создать пост</my-button>
+                >Добавить</my-button>
                 <my-select v-model="selectedSort" :options="sortOptions"/>
             </div>
             <my-dialog
@@ -51,7 +52,7 @@
                 }
             },
             removePost(post) {
-                this.posts = this.posts.filter(p => p.id != post.id);
+                this.posts = this.posts.filter(p => p.uuid != post.uuid);
                 console.log('remove event handled!');
             },
             changePage(page_number) {
@@ -60,7 +61,9 @@
             async fetchPosts() {
                 try {
                     this.isPostsLoading = true;
-                    const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
+                    //const url = 'https://jsonplaceholder.typicode.com/posts';
+                    const url = 'http://localhost:5000/usercache';
+                    const response = await axios.get(url, {
                         params: {
                             _page: this.page,
                             _limit: this.limit
@@ -122,10 +125,10 @@
             },
             sortedAndSearchedPosts() {
 
-                if (!this.selectedSort || this.selectedSort === 'title') {
-                    return this.sortedPosts.filter(post => post.title.toLowerCase().includes(this.searchQuery.toLowerCase()));
+                if (!this.selectedSort || this.selectedSort === 'name') {
+                    return this.sortedPosts.filter(post => post.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
                 } else {
-                    return this.sortedPosts.filter(post => post.body.toLowerCase().includes(this.searchQuery.toLowerCase()));
+                    return this.sortedPosts.filter(post => post.uuid.toLowerCase().includes(this.searchQuery.toLowerCase()));
                 }
             }
         },
@@ -133,7 +136,7 @@
         data() {
             return {
                 posts: [
-                    {id: '1', title: 'Title 1', body: 'Body 1'}
+                    {id: '1', name: 'Title 1', uuid: 'Body 1'}
                 ],
                 dialogVisible: false,
                 autoclosable: true,
@@ -144,8 +147,8 @@
                 limit: 10,
                 totalPages: 0,
                 sortOptions: [
-                    {value: 'title', name: 'По названию'},
-                    {value: 'body', name: 'По описанию'},
+                    {value: 'name', name: 'По имени'},
+                    {value: 'uuid', name: 'По UUID'},
                 ]
             }
         },
