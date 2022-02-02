@@ -183,6 +183,11 @@
             min-width: 150px;
         }
 
+        .app-buttons input {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
         .button-select-page {
             width: 40px;
             height: 40px;
